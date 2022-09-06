@@ -2,20 +2,20 @@ class Libbw64 < Formula
   desc "Broadcast Wave 64 (ITU-R BS.2088) library"
   homepage "https://libbw64.readthedocs.io/en/latest/"
 
-  url "https://github.com/IRT-Open-Source/libbw64/archive/0.10.0.tar.gz"
+  url "https://github.com/ebu/libbw64/archive/0.10.0.tar.gz"
   sha256 "4ae6e02868f98cfeadb50c4f246527a4d2d6013ee483790a04bb997591416d21"
 
-  head "https://github.com/IRT-Open-Source/libbw64.git"
+  head "https://github.com/ebu/libbw64.git"
 
   depends_on "cmake" => :build
 
   def install
     ENV.cxx11
     args = std_cmake_args
+    args << "-DUNIT_TESTS=OFF"
     system "cmake", ".", *args
-    system "make"
-    system "make", "test"
-    system "make", "install"
+    system "cmake", "--build", "."
+    system "cmake", "--build", ".", "--target", "install"
   end
 
   test do

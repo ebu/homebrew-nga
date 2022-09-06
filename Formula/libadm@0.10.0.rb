@@ -2,7 +2,7 @@ class LibadmAT0100 < Formula
   desc "Audio Definition Model (ITU-R BS.2076) library"
   homepage "https://libadm.readthedocs.io/en/latest/"
 
-  url "https://github.com/IRT-Open-Source/libadm/archive/0.10.0.tar.gz"
+  url "https://github.com/ebu/libadm/archive/0.10.0.tar.gz"
   sha256 "99d48e829d7e5283758add1e27c67681a4691eea2b0891b95e7702743d1b249a"
 
   keg_only :versioned_formula

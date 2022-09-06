@@ -2,10 +2,10 @@ class Libadm < Formula
   desc "Audio Definition Model (ITU-R BS.2076) library"
   homepage "https://libadm.readthedocs.io/en/latest/"
 
-  url "https://github.com/IRT-Open-Source/libadm/archive/0.12.0.tar.gz"
-  sha256 "0242b86158ffa1d79b734455faeff7133bfe1bb25303cf6a3893a97dbddb0dc7"
+  url "https://github.com/ebu/libadm/archive/0.13.0.tar.gz"
+  sha256 "34c317a8d38ca3f82386b39a7377b2ebf23fb692d7f2f5949648aec342c3f0ff"
 
-  head "https://github.com/IRT-Open-Source/libadm.git"
+  head "https://github.com/ebu/libadm.git"
 
   depends_on "cmake" => :build
   depends_on "boost"
@@ -13,11 +13,13 @@ class Libadm < Formula
   def install
     ENV.cxx11
     args = std_cmake_args
-    args << "-DBUILD_SHARED_LIBS=ON"
-    system "cmake", ".", *args
-    system "make"
-    system "make", "test"
-    system "make", "install"
+    args << "-DADM_UNIT_TESTS=OFF"
+    system "cmake", ".", "-B", "shared", *args, "-DBUILD_SHARED_LIBS=ON"
+    system "cmake", "--build", "shared"
+    system "cmake", "--build", "shared", "--target", "install"
+    system "cmake", ".", "-B", "static", *args, "-DBUILD_SHARED_LIBS=OFF"
+    system "cmake", "--build", "static"
+    system "cmake", "--build", "static", "--target", "install"
   end
 
   test do
@@ -33,7 +35,7 @@ class Libadm < Formula
         return 0;
       }
     EOS
-    system ENV.cxx, "-std=c++11", "-fvisibility=hidden", "-L#{lib}", "-ladm", "test.cpp", "-o", "test"
+    system ENV.cxx, "-std=c++14", "-fvisibility=hidden", "-L#{lib}", "-ladm", "test.cpp", "-o", "test"
     system "./test"
   end
 end
