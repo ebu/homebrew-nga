@@ -1,18 +1,20 @@
 # homebrew-nga
 
-This is a [homebrew](https://brew.sh/) tap for [IRT](https://www.irt.de)'s Next Generation Audio software.
+This is a [homebrew](https://brew.sh/) tap for EBU Next Generation Audio software[^1].
+
+[^1]: Previously developed by IRT, now maintained by the EBU.
 
 It contains the following formulas:
 
-- [`libadm`](https://github.com/irt-open-source/libadm) - Audio Definition Model (ITU-R BS.2076) library
-- [`libbw64`](https://github.com/irt-open-source/libbw64) - Broadcast Wave 64 (ITU-R BS.2088) library
+- [`libadm`](https://github.com/ebu/libadm) - Audio Definition Model (ITU-R BS.2076) library
+- [`libbw64`](https://github.com/ebu/libbw64) - Broadcast Wave 64 (ITU-R BS.2088) library
 
 ## Usage
 
 The tap can be added to your local homebrew installation using
 
 ```
-brew tap irt-open-source/homebrew-nga
+brew tap ebu/homebrew-nga
 ```
 
 After that the formulas can be used like any other formula in the homebrew core
